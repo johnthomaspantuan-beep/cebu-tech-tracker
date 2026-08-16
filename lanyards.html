@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Tech Official Lanyards - Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #0b0b0b;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #0b0b0b;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            border-color: #52514e;
+            background: #fcfcfb;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            color: #52514e;
+            font-size: 14px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #52514e;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 500;
+            color: #0b0b0b;
+        }
+
+        .filters {
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"], input[type="checkbox"] {
+            padding: 8px 12px;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0b0b0b;
+            box-shadow: 0 0 0 3px rgba(11, 11, 11, 0.1);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #fcfcfb;
+            border-bottom: 0.5px solid #e1e0d9;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            color: #52514e;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid #e1e0d9;
+        }
+
+        tbody tr:hover {
+            background: #fcfcfb;
+        }
+
+        tbody tr[data-paid="true"] {
+            opacity: 0.6;
+        }
+
+        .name-cell {
+            font-weight: 500;
+            color: #0b0b0b;
+        }
+
+        .number {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .paid-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #eaf3de;
+            color: #3b6d11;
+        }
+
+        .unpaid-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #fcebeb;
+            color: #a32d2d;
+        }
+
+        .checkbox-cell input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a19;
+                color: #f0efec;
+            }
+
+            h1, .name-cell, .metric-value {
+                color: #f0efec;
+            }
+
+            .subtitle, .metric-label, th {
+                color: #c3c2b7;
+            }
+
+            .back-btn, .metric-card, .filters, .table-wrapper {
+                background: #262625;
+                border-color: #383835;
+            }
+
+            .back-btn:hover {
+                border-color: #888780;
+                background: #383835;
+            }
+
+            thead {
+                background: #383835;
+            }
+
+            tbody tr:hover {
+                background: #383835;
+            }
+
+            td {
+                border-color: #383835;
+            }
+
+            input[type="text"], input[type="checkbox"] {
+                background: #383835;
+                border-color: #383835;
+                color: #f0efec;
+            }
+
+            input[type="text"]:focus {
+                border-color: #f0efec;
+                box-shadow: 0 0 0 3px rgba(240, 239, 236, 0.1);
+            }
+
+            .paid-badge {
+                background: #173404;
+                color: #97c459;
+            }
+
+            .unpaid-badge {
+                background: #501313;
+                color: #f09595;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <a href="index.html" class="back-btn">←</a>
+                <div>
+                    <h1>Official Lanyards</h1>
+                    <p class="subtitle">Cebu Tech Official Lanyards - Orders & Payment Tracking</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-label">Total Orders</div>
+                <div class="metric-value" id="totalOrders">-</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Total Amount</div>
+                <div class="metric-value" id="totalAmount">₱0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Amount Paid</div>
+                <div class="metric-value" style="color: #3b6d11;" id="totalPaid">₱0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Outstanding</div>
+                <div class="metric-value" style="color: #a32d2d;" id="totalUnpaid">₱0</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <input type="text" id="searchBox" placeholder="Search by name or lanyard type..." />
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #52514e; white-space: nowrap;">
+                    <input type="checkbox" id="showUnpaidOnly" onchange="filterTable()" />
+                    Show unpaid only
+                </label>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Lanyard Type</th>
+                        <th class="number">Price</th>
+                        <th class="number">Discount</th>
+                        <th class="number">Total</th>
+                        <th class="center">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 2rem; color: #52514e;">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // CSV URL for Google Sheet (gid=164273013)
+        const SHEET_ID = '1lkehsVGNTbT3aVN7NeRdSsz3_6mBidKNe2hhZEgRE-c';
+        const GID = '164273013';
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1lkehsVGNTbT3aVN7NeRdSsz3_6mBidKNe2hhZEgRE-c/export?format=csv&gid=164273013';
+
+        let data = [];
+
+        // Parse CSV helper handling quoted text
+        function parseCSV(text) {
+            const lines = text.split('\n');
+            return lines.map(line => {
+                const row = [];
+                let insideQuote = false;
+                let entry = '';
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        insideQuote = !insideQuote;
+                    } else if (char === ',' && !insideQuote) {
+                        row.push(entry.trim().replace(/^"|"$/g, ''));
+                        entry = '';
+                    } else {
+                        entry += char;
+                    }
+                }
+                row.push(entry.trim().replace(/^"|"$/g, ''));
+                return row;
+            });
+        }
+
+        // Load data from Google Sheet CSV
+        fetch(CSV_URL)
+            .then(res => res.text())
+            .then(csvText => {
+                const parsed = parseCSV(csvText);
+                
+                // Extract headers and data rows (assuming Row 1 contains column headers)
+                const rows = parsed.slice(1);
+
+                data = rows.map((row, index) => {
+                    // Adapt array indexes depending on your Google Form columns:
+                    // Example: [Timestamp, Name, Lanyard Choice, Price, Discount]
+                    const name = row[1] || 'Unknown';
+                    const lanyard = row[2] || 'Standard Lanyard';
+                    const price = parseFloat(row[3]) || 150;
+                    const discount = parseFloat(row[4]) || 0;
+
+                    // Restore local saved payment status per row index
+                    const savedPaid = localStorage.getItem(`lanyard_paid_${index}`);
+                    const paid = savedPaid !== null ? savedPaid === 'true' : false;
+
+                    return {
+                        id: index,
+                        name: name,
+                        lanyard: lanyard,
+                        price: price,
+                        discount: discount,
+                        paid: paid
+                    };
+                }).filter(item => item.name && item.name !== 'Unknown'); // Filter empty rows
+
+                renderTable();
+                updateSummary();
+            })
+            .catch(err => {
+                console.error('Error loading Google Sheet data:', err);
+                document.getElementById('tableBody').innerHTML = 
+                    '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #a32d2d;">Error fetching Google Sheet data. Make sure link sharing is on.</td></tr>';
+            });
+
+        function renderTable(filtered = null) {
+            const tbody = document.getElementById('tableBody');
+            const toRender = filtered || data;
+            
+            if (toRender.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #52514e;">No records found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = toRender.map((item) => {
+                const total = item.price - item.discount;
+                
+                return `
+                    <tr data-paid="${item.paid}" data-id="${item.id}">
+                        <td class="name-cell">${item.name}</td>
+                        <td>${item.lanyard}</td>
+                        <td class="number">₱${item.price.toFixed(2)}</td>
+                        <td class="number">-₱${item.discount.toFixed(2)}</td>
+                        <td class="number"><strong>₱${total.toFixed(2)}</strong></td>
+                        <td class="center checkbox-cell">
+                            <label style="cursor: pointer;">
+                                <input type="checkbox" ${item.paid ? 'checked' : ''} 
+                                    onchange="togglePaid(${item.id})" />
+                            </label>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function togglePaid(id) {
+            const item = data.find(d => d.id === id);
+            if (item) {
+                item.paid = !item.paid;
+                localStorage.setItem(`lanyard_paid_${id}`, item.paid);
+                updateSummary();
+                filterTable();
+            }
+        }
+
+        function updateSummary() {
+            const total = data.reduce((sum, item) => sum + (item.price - item.discount), 0);
+            const paid = data.filter(item => item.paid).reduce((sum, item) => sum + (item.price - item.discount), 0);
+            const unpaid = total - paid;
+            
+            document.getElementById('totalOrders').textContent = data.length;
+            document.getElementById('totalAmount').textContent = '₱' + total.toFixed(2);
+            document.getElementById('totalPaid').textContent = '₱' + paid.toFixed(2);
+            document.getElementById('totalUnpaid').textContent = '₱' + unpaid.toFixed(2);
+        }
+
+        function filterTable() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const unpaidOnly = document.getElementById('showUnpaidOnly').checked;
+            
+            const filtered = data.filter(item => {
+                const matchesSearch = !searchTerm || 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.lanyard.toLowerCase().includes(searchTerm);
+                
+                const matchesFilter = !unpaidOnly || !item.paid;
+                
+                return matchesSearch && matchesFilter;
+            });
+            
+            renderTable(filtered);
+        }
+
+        document.getElementById('searchBox').addEventListener('input', filterTable);
+    </script>
+</body>
+</html>
