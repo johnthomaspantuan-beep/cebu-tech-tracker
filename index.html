@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTU Merchandise & Lanyards Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #3d7296;
+            color: #294087;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #0b0b0b;
+        }
+
+        .subtitle {
+            color: #a57c00;
+            font-size: 16px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: rgb(140, 107, 16);
+            border: 0.5px solid #001456;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .project-card:hover {
+            border-color: #ae8a1e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            background: #074885;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon.lanyards {
+            background: #f0f8e6;
+        }
+
+        .project-card h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #0b0b0b;
+        }
+
+        .project-card p {
+            color: #725705;
+            font-size: 14px;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+    
+        }
+
+        .stat {
+            flex: 1;
+            background: #fcfcfb;
+            padding: 0.75rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: #072474;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #898781;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 0.5px solid #52514e;
+            border-radius: 6px;
+            background: transparent;
+            color: #0b0b0b;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #fcfcfb;
+            border-color: #0b0b0b;
+        }
+
+        .btn-primary {
+            background: #0b0b0b;
+            color: white;
+            border-color: #0b0b0b;
+        }
+
+        .btn-primary:hover {
+            background: #2c2c2a;
+        }
+
+        .section {
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #610606;
+        }
+
+        code {
+            background: #fcfcfb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #993c1d;
+        }
+
+        pre {
+            background: #fcfcfb;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a19;
+                color: #f0efec;
+            }
+
+            .project-card, .section {
+                background: #015688;
+                border-color: #383835;
+            }
+
+            .project-card:hover {
+                border-color: #888780;
+            }
+
+            .project-icon {
+                background: #0c447c;
+            }
+
+            .project-icon.lanyards {
+                background: #2f6c03;
+            }
+
+            .project-card h2, h1, .stat-value {
+                color: #f0efec;
+            }
+
+            .project-card p, .subtitle, .stat-label {
+                color: #c3c2b7;
+            }
+
+            .btn {
+                border-color: #888780;
+                color: #f0efec;
+            }
+
+            .btn:hover {
+                background: #383835;
+                border-color: #f0efec;
+            }
+
+            .btn-primary {
+                background: #f0efec;
+                color: #1a1a19;
+                border-color: #f0efec;
+            }
+
+            .btn-primary:hover {
+                background: #c3c2b7;
+            }
+
+            code {
+                background: #383835;
+                color: #fab219;
+            }
+
+            pre {
+                background: #383835;
+                color: #cb9a08;
+            }
+        }
+    </style>
+</head>
+<body>  
+    <div class="container">
+        <header>
+            <h1>Cebu Tech Merchandise Tracker</h1>
+            <p class="subtitle">Manage orders, pricing, and payments across all projects</p>
+        </header>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon lanyards">
+                <img src="lanyard.png" alt="Lanyard Badge" style="max-height: 52px; width: auto;">
+                </div>
+                <h2>Official Lanyards</h2>
+                <p>Track Cebu Tech Official Lanyards orders and payment status.</p>
+                <div class="project-stats"> 
+                    <div class="stat">
+                        <div class="stat-value" id="lanyards-orders" style="color: #0f946e;">7</div>
+                        <div class="stat-label"style="color: #0f946e;">Orders</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="lanyards-unpaid" style="color: #2563eb;">₱1,050</div>
+                        <div class="stat-label"  style="color: #2563eb;">Unpaid</div>
+                    </div>
+                </div>
+                <a href="lanyards.html" class="btn btn-primary">Open Tracker →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">
+                    <img src="merch.png" alt="Merchandise" style="max-height: 48px; width: auto;">
+                </div>
+                <h2>BSCpE 1C Merchandise</h2>
+                <p>Manage polos, t-shirts, lanyards, and pins for BSCpE 1C Evening class.</p>
+                <div class="project-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="merch-orders"  style="color: #0f946e;">14</div>
+                        <div class="stat-label" style="color: #0f946e;">Orders</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="merch-unpaid"  style="color: #2563eb;">₱0.00</div>
+                        <div class="stat-label" style="color: #2563eb;">Unpaid</div>
+                    </div>
+                </div>
+                <a href="merchandise.html" class="btn btn-primary">Open Tracker →</a>
+            </div>
+        </div>
+
+    <script>
+        // Load stats
+        fetch('data.json')
+            .then(r => r.json())
+            .then(data => {
+                const lanyards = data.lanyards;
+                const merch = data.merchandise;
+
+                const lanyardsUnpaid = lanyards
+                    .filter(item => !item.paid)
+                    .reduce((sum, item) => sum + (item.price - item.discount), 0);
+
+                document.getElementById('lanyards-orders').textContent = lanyards.length;
+                document.getElementById('lanyards-unpaid').textContent = '₱' + lanyardsUnpaid.toFixed(2);
+                document.getElementById('merch-orders').textContent = merch.length;
+            });
+    </script>
+</body>
+</html>
