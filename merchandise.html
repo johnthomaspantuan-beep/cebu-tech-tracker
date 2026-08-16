@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSCpE 1C Evening Merchandise - Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #0b0b0b;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #0b0b0b;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            border-color: #52514e;
+            background: #fcfcfb;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            color: #52514e;
+            font-size: 14px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #52514e;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 500;
+            color: #0b0b0b;
+        }
+
+        .filters {
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 6px;
+            font-size: 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0b0b0b;
+            box-shadow: 0 0 0 3px rgba(11, 11, 11, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #52514e;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #0b0b0b;
+            border-bottom-color: #0b0b0b;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #0b0b0b;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: white;
+            border: 0.5px solid #e1e0d9;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        thead {
+            background: #fcfcfb;
+            border-bottom: 0.5px solid #e1e0d9;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            color: #52514e;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid #e1e0d9;
+        }
+
+        tbody tr:hover {
+            background: #fcfcfb;
+        }
+
+        .name-cell {
+            font-weight: 500;
+            color: #0b0b0b;
+        }
+
+        .status-cell {
+            color: #52514e;
+            font-size: 12px;
+        }
+
+        .status-complete {
+            color: #3b6d11;
+            font-weight: 500;
+        }
+
+        .status-incomplete {
+            color: #993c1d;
+            font-weight: 500;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a19;
+                color: #f0efec;
+            }
+
+            h1, .name-cell, .metric-value {
+                color: #f0efec;
+            }
+
+            .subtitle, .metric-label, th, .status-cell {
+                color: #c3c2b7;
+            }
+
+            .back-btn, .metric-card, .filters, .tabs, .table-wrapper {
+                background: #262625;
+                border-color: #383835;
+            }
+
+            .back-btn:hover {
+                border-color: #888780;
+                background: #383835;
+            }
+
+            thead {
+                background: #383835;
+            }
+
+            tbody tr:hover {
+                background: #383835;
+            }
+
+            td {
+                border-color: #383835;
+            }
+
+            input[type="text"] {
+                background: #383835;
+                border-color: #383835;
+                color: #f0efec;
+            }
+
+            input[type="text"]:focus {
+                border-color: #f0efec;
+                box-shadow: 0 0 0 3px rgba(240, 239, 236, 0.1);
+            }
+
+            .tab-btn {
+                color: #c3c2b7;
+                border-color: transparent;
+            }
+
+            .tab-btn.active {
+                color: #f0efec;
+                border-color: #f0efec;
+            }
+
+            .tab-btn:hover:not(.active) {
+                color: #f0efec;
+            }
+
+            .status-complete {
+                color: #97c459;
+            }
+
+            .status-incomplete {
+                color: #fab219;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <a href="index.html" class="back-btn">←</a>
+                <div>
+                    <h1>BSCpE 1C Evening Merchandise</h1>
+                    <p class="subtitle">Polos, T-Shirts, Lanyards & Pins Tracking</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-label">Total Orders</div>
+                <div class="metric-value" id="totalOrders">-</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Polos Ordered</div>
+                <div class="metric-value" id="poloCount">0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">T-Shirts Ordered</div>
+                <div class="metric-value" id="tshirtCount">0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Lanyards Ordered</div>
+                <div class="metric-value" id="lanyardCount">0</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <input type="text" id="searchBox" placeholder="Search by name..." />
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('all')">All Orders</button>
+            <button class="tab-btn" onclick="switchTab('polos')">Polos</button>
+            <button class="tab-btn" onclick="switchTab('tshirts')">T-Shirts</button>
+            <button class="tab-btn" onclick="switchTab('lanyards')">Lanyards</button>
+            <button class="tab-btn" onclick="switchTab('pins')">Pins</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead id="tableHead">
+                    <tr>
+                        <th>Name</th>
+                        <th>Polo</th>
+                        <th>Polo Size</th>
+                        <th>T-Shirt</th>
+                        <th>T-Shirt Size</th>
+                        <th>Lanyard</th>
+                        <th>Pins</th>
+                        <th>Paid</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 2rem; color: #52514e;">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<script>
+        const SHEET_ID = '1BECpkVaUY7vurRUWzbQz56xL7FV9iSipUPxHeoetDDw';
+        const GID = '1388042048'; // Change to the specific tab GID if it's not the first tab
+        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
+
+
+        let data = [];
+        let currentTab = 'all';
+
+        function parseCSV(text) {
+            const lines = text.split('\n');
+            return lines.map(line => {
+                const row = [];
+                let insideQuote = false;
+                let entry = '';
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        insideQuote = !insideQuote;
+                    } else if (char === ',' && !insideQuote) {
+                        row.push(entry.trim().replace(/^"|"$/g, ''));
+                        entry = '';
+                    } else {
+                        entry += char;
+                    }
+                }
+                row.push(entry.trim().replace(/^"|"$/g, ''));
+                return row;
+            });
+        }
+
+        fetch(CSV_URL)
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to fetch Google Sheet data');
+                return res.text();
+            })
+            .then(csvText => {
+                const parsed = parseCSV(csvText);
+                const rows = parsed.slice(1);
+
+                // Map Google Form responses with an explicit index tracking ID
+                data = rows.map((row, index) => {
+                    const name = row[1] || '';
+                    const polo = row[2] || '';
+                    const poloSize = row[3] || '';
+                    const tshirt = row[4] || '';
+                    const tshirtSize = row[5] || '';
+                    const lanyard = row[6] || '';
+                    const pins = row[7] || '';
+                    const paidStatus = (row[8] || '').toLowerCase();
+                    const paid = paidStatus === 'yes' || paidStatus === 'true' || paidStatus === 'paid';
+
+                    return {
+                        id: index,
+                        name: name,
+                        polo: polo,
+                        poloSize: poloSize,
+                        tshirt: tshirt,
+                        tshirtSize: tshirtSize,
+                        lanyard: lanyard,
+                        pins: pins,
+                        paid: paid
+                    };
+                }).filter(item => item.name.trim() !== '');
+
+                renderTable();
+                updateMetrics();
+            })
+            .catch(err => {
+                console.error('Error loading Google Sheet data:', err);
+                document.getElementById('tableBody').innerHTML = 
+                    '<tr><td colspan="8" style="text-align: center; padding: 2rem; color: #a32d2d;">Error fetching Google Sheet data. Make sure access is set to "Anyone with the link can view".</td></tr>';
+            });
+
+        function togglePaid(id) {
+            const item = data.find(entry => entry.id === id);
+            if (item) {
+                item.paid = !item.paid;
+                renderTable();
+                updateMetrics();
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            let toRender = [...data];
+
+            const searchTerm = document.getElementById('searchBox')?.value.toLowerCase() || '';
+            toRender = toRender.filter(item => 
+                !searchTerm || item.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (currentTab === 'polos') {
+                toRender = toRender.filter(item => item.polo && item.polo !== '—');
+            } else if (currentTab === 'tshirts') {
+                toRender = toRender.filter(item => item.tshirt && item.tshirt !== '—');
+            } else if (currentTab === 'lanyards') {
+                toRender = toRender.filter(item => item.lanyard && item.lanyard !== '—');
+            } else if (currentTab === 'pins') {
+                toRender = toRender.filter(item => item.pins && item.pins !== '—');
+            }
+
+            if (toRender.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 2rem; color: #52514e;">No records found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = toRender.map((item) => {
+                const paidText = item.paid ? 'Yes' : 'No';
+                const paidClass = item.paid ? 'status-complete' : 'status-incomplete';
+                return `
+                    <tr>
+                        <td class="name-cell">${item.name}</td>
+                        <td class="status-cell">${item.polo || '—'}</td>
+                        <td class="status-cell">${item.poloSize || '—'}</td>
+                        <td class="status-cell">${item.tshirt || '—'}</td>
+                        <td class="status-cell">${item.tshirtSize || '—'}</td>
+                        <td class="status-cell">${item.lanyard || '—'}</td>
+                        <td class="status-cell">${item.pins || '—'}</td>
+                        <td class="status-cell">
+                            <button 
+                                onclick="togglePaid(${item.id})" 
+                                class="${paidClass}" 
+                                style="background: none; border: 1px solid currentColor; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; font-weight: 500;"
+                            >
+                                ${paidText}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function switchTab(tab, event) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach((btn) => {
+                btn.classList.remove('active');
+            });
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            renderTable();
+        }
+
+        function updateMetrics() {
+            const polos = data.filter(item => item.polo && item.polo !== '—').length;
+            const tshirts = data.filter(item => item.tshirt && item.tshirt !== '—').length;
+            const lanyards = data.filter(item => item.lanyard && item.lanyard !== '—').length;
+
+            document.getElementById('totalOrders').textContent = data.length;
+            document.getElementById('poloCount').textContent = polos;
+            document.getElementById('tshirtCount').textContent = tshirts;
+            document.getElementById('lanyardCount').textContent = lanyards;
+        }
+
+        document.getElementById('searchBox')?.addEventListener('input', () => renderTable());
+    </script>
+</body>
+</html>
