@@ -1,0 +1,222 @@
+{
+  "lanyards": [
+    {
+      "id": 0,
+      "name": "Jiane Angel Roldan",
+      "lanyard": "College of Engineering",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 1,
+      "name": "Enrico V. Lauro Jr.",
+      "lanyard": "COE",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 2,
+      "name": "GABRIEL ARNOLD S. GIANGAN",
+      "lanyard": "COE Lanyard",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 3,
+      "name": "Macneil John Abellana",
+      "lanyard": "University Lanyard & College of Engineering",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 4,
+      "name": "APAS, JOHN IKE C.",
+      "lanyard": "COE",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 5,
+      "name": "Joseph Bruce Arnoza R.",
+      "lanyard": "Red & Yellow",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    },
+    {
+      "id": 6,
+      "name": "Rhyzel Faith Degolacion",
+      "lanyard": "COE",
+      "price": 150,
+      "discount": 0,
+      "paid": false
+    }
+  ],
+  "merchandise": [
+    {
+      "id": 0,
+      "name": "Niño A. Sabello",
+      "polo": "Design B",
+      "poloSize": "L",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design B",
+      "pins": null,
+      "paid": false
+    },
+    {
+      "id": 1,
+      "name": "Joseph Bruce R. Arnoza",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design A (8/15/2026)",
+      "pins": null,
+      "paid": true
+    },
+    {
+      "id": 2,
+      "name": "OLILA, JEAN LYLE C.",
+      "polo": "Design B",
+      "poloSize": "M",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design A",
+      "pins": "11",
+      "paid": false
+    },
+    {
+      "id": 3,
+      "name": "Rhyzel Faith Degolacion",
+      "polo": "Design B",
+      "poloSize": "XXL",
+      "tshirt": "Design C",
+      "tshirtSize": "XXL",
+      "lanyard": "Design B",
+      "pins": "4",
+      "paid": false
+    },
+    {
+      "id": 4,
+      "name": "Cagang Keza Marie",
+      "polo": "Design B",
+      "poloSize": "M",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design B",
+      "pins": "10",
+      "paid": false
+    },
+    {
+      "id": 5,
+      "name": "Jiane Angel B Roldan",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design A",
+      "pins": "1, 9",
+      "paid": false
+    },
+    {
+      "id": 6,
+      "name": "Abalos Brian Angelo",
+      "polo": "Design B",
+      "poloSize": "XXL",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design A",
+      "pins": null,
+      "paid": false
+    },
+    {
+      "id": 7,
+      "name": "Galen M. Rosales Jr.",
+      "polo": "Design A & B",
+      "poloSize": "L",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design A",
+      "pins": "9 (25mm)",
+      "paid": false
+    },
+    {
+      "id": 8,
+      "name": "Macneil Abellana",
+      "polo": "A & B",
+      "poloSize": "XL",
+      "tshirt": "A, B & C",
+      "tshirtSize": "XL",
+      "lanyard": "A & B",
+      "pins": "13, 10 & 9 (58mm)",
+      "paid": false
+    },
+    {
+      "id": 9,
+      "name": "GABRIEL ARNOLD S. GIANGAN",
+      "polo": "Design B",
+      "poloSize": "M",
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": "Design B",
+      "pins": "13",
+      "paid": false
+    },
+    {
+      "id": 10,
+      "name": "Unknown (Row 11)",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": null,
+      "pins": null,
+      "paid": false
+    },
+    {
+      "id": 11,
+      "name": "Unknown (Row 12)",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": null,
+      "pins": null,
+      "paid": false
+    },
+    {
+      "id": 12,
+      "name": "Unknown (Row 13)",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": null,
+      "pins": null,
+      "paid": false
+    },
+    {
+      "id": 13,
+      "name": "Unknown (Row 14)",
+      "polo": null,
+      "poloSize": null,
+      "tshirt": null,
+      "tshirtSize": null,
+      "lanyard": null,
+      "pins": null,
+      "paid": false
+    }
+  ],
+  "settings": {
+    "lanyardPrice": 150,
+    "lanyardDiscount": 0,
+    "currency": "PHP",
+    "currencySymbol": "₱"
+  }
+}
