@@ -314,7 +314,6 @@
                         <th>Name</th>
                         <th>Lanyard Type</th>
                         <th class="number">Price</th>
-                        <th class="number">Discount</th>
                         <th class="number">Total</th>
                         <th class="center">Status</th>
                     </tr>
@@ -373,8 +372,8 @@
                     // Example: [Timestamp, Name, Lanyard Choice, Price, Discount]
                     const name = row[1] || 'Unknown';
                     const lanyard = row[2] || 'Standard Lanyard';
-                    const price = parseFloat(row[3]) || 150;
-                    const discount = parseFloat(row[4]) || 0;
+                    const price = parseFloat(row[3]) || 99;
+                   
 
                     // Restore local saved payment status per row index
                     const savedPaid = localStorage.getItem(`lanyard_paid_${index}`);
@@ -385,7 +384,6 @@
                         name: name,
                         lanyard: lanyard,
                         price: price,
-                        discount: discount,
                         paid: paid
                     };
                 }).filter(item => item.name && item.name !== 'Unknown'); // Filter empty rows
@@ -409,14 +407,13 @@
             }
 
             tbody.innerHTML = toRender.map((item) => {
-                const total = item.price - item.discount;
+                const total = item.price;
                 
                 return `
                     <tr data-paid="${item.paid}" data-id="${item.id}">
                         <td class="name-cell">${item.name}</td>
                         <td>${item.lanyard}</td>
                         <td class="number">₱${item.price.toFixed(2)}</td>
-                        <td class="number">-₱${item.discount.toFixed(2)}</td>
                         <td class="number"><strong>₱${total.toFixed(2)}</strong></td>
                         <td class="center checkbox-cell">
                             <label style="cursor: pointer;">
@@ -440,8 +437,8 @@
         }
 
         function updateSummary() {
-            const total = data.reduce((sum, item) => sum + (item.price - item.discount), 0);
-            const paid = data.filter(item => item.paid).reduce((sum, item) => sum + (item.price - item.discount), 0);
+            const total = data.reduce((sum, item) => sum + (item.price), 0);
+            const paid = data.filter(item => item.paid).reduce((sum, item) => sum + (item.price), 0);
             const unpaid = total - paid;
             
             document.getElementById('totalOrders').textContent = data.length;
